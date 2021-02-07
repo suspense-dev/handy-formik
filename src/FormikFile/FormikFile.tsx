@@ -64,14 +64,14 @@ export const FormikFile = ({ render, name, maxFiles, multiple, maxSize, accept, 
 
     const handleUpload = (dropped: File[]) => {
         setUploading(true);
-        const newAmount = dropped.length;
-        const currentAmount = filesState.length;
+        const droppedFilesAmount = dropped.length;
+        const existingFilesAMount = filesState.length;
         let acceptedFiles = dropped;
         let formattedAcceptedFiles: CustomFile[] = [];
 
-        if (multiple && maxFiles && currentAmount + newAmount > maxFiles) {
+        if (multiple && maxFiles && existingFilesAMount + droppedFilesAmount > maxFiles) {
             acceptedFiles = acceptedFiles.slice(
-                0, -1 * (currentAmount + newAmount - maxFiles)
+                0, -1 * (existingFilesAMount + droppedFilesAmount - maxFiles)
             );
         }
 
