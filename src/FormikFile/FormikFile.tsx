@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useFormikContext } from 'formik';
 import Dropzone from 'react-dropzone';
 
+import { FormikFileCustomFile, FormikFileFormat } from './FormikFile.types';
 
 type Props = {
     name: string;
@@ -9,7 +10,7 @@ type Props = {
     maxSize?: number;
     multiple?: boolean;
     accept?: string;
-    format?: Format;
+    format?: FormikFileFormat;
 
     render: (props: OutputProps) => any;
 }
@@ -17,7 +18,7 @@ type Props = {
 type OutputProps = {
     name: string;
     value: any;
-    files: CustomFile[];
+    files: FormikFileCustomFile[];
     touched: boolean;
     error: string | null;
     isValid: boolean | null;
@@ -29,21 +30,12 @@ type OutputProps = {
     onBlur: (e: React.SyntheticEvent) => void;
 }
 
-type CustomFile = {
-    name: string;
-    size: number;
-    preview: string;
-    src: File | string;
-}
-
-type Format = 'base64';
-
 export const FormikFile = ({ render, name, maxFiles, multiple, maxSize, accept, format, ...rest }: Props) => {
     if (!name) throw new Error(`FormikFile: prop 'name' doesn't exist!`);
     if (!render) throw new Error(`FormikFile: prop 'render' doesn't exist!`);
 
     const myRef: React.RefObject<any> | null = React.useRef(null);
-    const [ filesState, setFilesState ]: any = React.useState <CustomFile[] | string | null>([]);
+    const [ filesState, setFilesState ]: any = React.useState <FormikFileCustomFile[] | string | null>([]);
     const [ isUploading, setUploading ]: any = React.useState(false);
     const {
         values,
@@ -67,7 +59,7 @@ export const FormikFile = ({ render, name, maxFiles, multiple, maxSize, accept, 
         const droppedFilesAmount = dropped.length;
         const existingFilesAMount = filesState.length;
         let acceptedFiles = dropped;
-        let formattedAcceptedFiles: CustomFile[] = [];
+        let formattedAcceptedFiles: FormikFileCustomFile[] = [];
 
         if (multiple && maxFiles && existingFilesAMount + droppedFilesAmount > maxFiles) {
             acceptedFiles = acceptedFiles.slice(

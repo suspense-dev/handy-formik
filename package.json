@@ -34,6 +34,10 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@storybook/addon-actions": "^6.1.17",
+    "@storybook/addon-essentials": "^6.1.17",
+    "@storybook/addon-links": "^6.1.17",
+    "@storybook/react": "^6.1.17",
     "@svgr/rollup": "^2.4.1",
     "@types/dropzone": "^5.5.2",
     "@types/enzyme-adapter-react-16": "^1.0.6",
@@ -42,6 +46,7 @@
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
     "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.1.4",
     "cz-conventional-changelog": "^3.1.0",
