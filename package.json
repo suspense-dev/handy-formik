@@ -19,7 +19,8 @@
     "start": "rollup -c -w",
     "prepare": "yarn run build",
     "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build",
+    "precommit": "echo \"precommit\""
   },
   "dependencies": {
     "formik": "^2.1.4",
@@ -60,5 +61,10 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run precommit"
+    }
+  }
 }
