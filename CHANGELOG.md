@@ -1,3 +1,10 @@
+# 1.0.0 (2021-12-19)
+
+
+### Features
+
+* init ([8d95ecf](https://github.com/suspense-dev/handy-formik/commit/8d95ecf2c38bb2f0b229f610c2d174533f189000))
+
 # 1.0.0 (2021-10-02)
 
 
