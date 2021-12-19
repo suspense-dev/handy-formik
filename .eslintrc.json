@@ -1,0 +1,68 @@
+{
+  "env": {
+    "jest": true,
+    "browser": true
+  },
+  "root": true,
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      }
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "airbnb/hooks",
+    "airbnb",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": "off",
+    "no-use-before-define": [0],
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-use-before-define": [1, { "variables": false }],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "import/prefer-default-export": "off",
+    "no-plusplus": "off",
+    "global-require": "off",
+    "no-useless-return": "off",
+    "operator-linebreak": "off",
+    "import/extensions": "off",
+    "no-nested-ternary": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "lines-between-class-members": "off",
+    "no-shadow": "off",
+    "object-curly-newline": "off",
+    "comma-dangle": "warn",
+    "semi": "warn",
+    "max-len": ["error", { "code": 120, "ignoreUrls": true, "ignoreTrailingComments": true }],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "import/newline-after-import": ["error", { "count": 1 }],
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off",
+    "function-paren-newline": "off",
+    "no-useless-constructor": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-max-props-per-line": "off",
+    "react/jsx-first-prop-new-line": "off",
+    "react/jsx-wrap-multilines": "off",
+    "react/require-default-props": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".ts", ".tsx"]
+      }
+    ],
+    "react/jsx-props-no-spreading": "off"
+  }
+}

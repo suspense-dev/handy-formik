@@ -1,0 +1,78 @@
+import React from 'react';
+import { fireEvent, waitFor } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
+
+import { ERROR_REQUIRED, renderComponent } from '../../lib/test-fixtures';
+import { FormikTextField } from '../formik-text-field';
+import { schema } from './fixtures';
+
+describe('FormikTextField', () => {
+  it('renders correctly', () => {
+    const { getByTestId } = renderComponent({
+      name: 'email',
+      initialValue: '',
+      component: FormikTextField,
+      schema,
+    });
+
+    expect(getByTestId('div')).toBeTruthy();
+  });
+
+  it('changes value correctly', async () => {
+    const { props } = renderComponent({
+      name: 'email',
+      initialValue: '',
+      component: FormikTextField,
+      schema,
+    });
+
+    expect(props.value).toBe('');
+
+    act(() => {
+      props.onChange({ target: { value: 'A' } });
+    });
+
+    await waitFor(() => {
+      expect(props.value).toBe('A');
+    });
+
+    act(() => {
+      props.onChange({ target: { value: '' } });
+    });
+
+    await waitFor(() => {
+      expect(props.value).toBe('');
+    });
+  });
+
+  it('validates correctly', async () => {
+    const { getByTestId, props } = renderComponent({
+      name: 'email',
+      initialValue: '',
+      component: FormikTextField,
+      schema,
+    });
+
+    expect(props.error).toBe(null); // no error if not touched and value === false
+    expect(props.isValid).toBe(null); // no isValid status if not touched and value === false
+    expect(props.isInvalid).toBe(null); // no isInvalid status if not touched and value === false
+
+    fireEvent.submit(getByTestId('form'));
+
+    await waitFor(() => {
+      expect(props.error).toBe(ERROR_REQUIRED); // has error if touched and value === false
+      expect(props.isValid).toBe(false); // no isValid status if touched and value === false
+      expect(props.isInvalid).toBe(true); // is invalid if touched and value === false
+    });
+
+    act(() => {
+      props.onChange({ target: { value: 'A' } });
+    });
+
+    await waitFor(() => {
+      expect(props.error).toBe(null); // no error if touched and value === true
+      expect(props.isValid).toBe(true); // is valid if is not touched and value === true
+      expect(props.isInvalid).toBe(false); // not invalid if is not touched and value === true
+    });
+  });
+});
