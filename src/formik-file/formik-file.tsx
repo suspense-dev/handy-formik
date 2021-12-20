@@ -107,9 +107,9 @@ export const FormikFile = ({
   }, [value, name, setFieldValue]);
 
   const isTouched = !!touched[name];
-  const isValid = isTouched ? !errors[name] : null;
-  const isInvalid = isTouched ? !!errors[name] : null;
   const error = isTouched ? errors[name] || null : null;
+  const isValid = isTouched ? !error : null;
+  const isInvalid = isTouched ? !!error : null;
 
   return (
     <>

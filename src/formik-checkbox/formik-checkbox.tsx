@@ -7,8 +7,8 @@ export const FormikCheckbox = ({ name, render }: FormikCheckboxProps) => {
   const { getFieldProps, setFieldValue, errors, touched }: any = useFormikContext();
   const { value, onBlur } = getFieldProps(name);
 
-  // value must be boolean
   React.useEffect(() => {
+    // value must be boolean
     if (typeof value !== 'boolean') {
       setFieldValue(name, false);
     }
@@ -23,9 +23,9 @@ export const FormikCheckbox = ({ name, render }: FormikCheckboxProps) => {
 
   const validValue = typeof value !== 'boolean' ? false : value;
   const isTouched = !!touched[name];
-  const isValid = isTouched ? !errors[name] : null;
-  const isInvalid = isTouched ? !!errors[name] : null;
   const error = isTouched ? errors[name] || null : null;
+  const isValid = isTouched ? !error : null;
+  const isInvalid = isTouched ? !!error : null;
 
   return (
     <>
