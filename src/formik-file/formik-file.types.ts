@@ -32,5 +32,7 @@ export type FormikFileProps = {
   accept?: string;
   asBase64?: boolean;
   render: (props: FormikFileOutputProps) => React.ReactNode;
-  onExceedMaxFiles?: (excessFiles: File[]) => Promise<void> | void;
+  onExceedMaxFiles?: (excessFiles: File[]) => any;
+  // depends on "multiple" prop
+  onExceedMaxSize?: (invalidFiles: File | File[]) => any;
 };

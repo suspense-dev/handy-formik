@@ -1,7 +1,7 @@
 import { useFormikContext } from 'formik';
 import React, { ChangeEvent } from 'react';
 
-import { serializeFiles } from './lib';
+import { serializeFiles, validateFilesBySize } from './lib';
 import { FormikFileProps } from './formik-file.types';
 
 export const FormikFile = ({
@@ -13,6 +13,7 @@ export const FormikFile = ({
   accept,
   asBase64,
   onExceedMaxFiles,
+  onExceedMaxSize,
 }: FormikFileProps) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [isUploading, setUploading]: any = React.useState(false);
@@ -38,6 +39,16 @@ export const FormikFile = ({
         onExceedMaxFiles?.(excessFiles);
       }
 
+      // validate files by file size
+      if (maxSize) {
+        const { validFiles, invalidFiles } = validateFilesBySize(acceptedFiles, maxSize);
+
+        if (invalidFiles.length) {
+          acceptedFiles = validFiles;
+          onExceedMaxSize?.(multiple ? invalidFiles : invalidFiles[0]);
+        }
+      }
+
       // convert raw files into serialized ones
       const serializedFiles = serializeFiles(acceptedFiles, asBase64);
 
@@ -55,7 +66,7 @@ export const FormikFile = ({
         }
       }, 70);
     },
-    [value, asBase64, maxFiles, multiple, name, onExceedMaxFiles, setFieldValue],
+    [value, asBase64, maxFiles, multiple, name, maxSize, onExceedMaxFiles, onExceedMaxSize, setFieldValue],
   );
 
   const handleDrop = React.useCallback(
@@ -107,7 +118,6 @@ export const FormikFile = ({
         name={name}
         accept={accept}
         multiple={multiple}
-        size={maxSize}
         type='file'
         hidden
         onChange={handleChange}

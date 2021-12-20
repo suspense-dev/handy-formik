@@ -13,7 +13,8 @@ FormikFile helps to upload files to Formik state.
 * `maxSize?: number`
 * `multiple?: boolean`
 * `accept?: string`
-* `onExceedMaxFiles?: (excessFiles: File[]) => Promise<void> | void`
+* `onExceedMaxFiles?: (excessFiles: File[]) => any`
+* `onExceedMaxSize?: (excessFiles: File | File[]) => any`
 
 ### Output props
 
